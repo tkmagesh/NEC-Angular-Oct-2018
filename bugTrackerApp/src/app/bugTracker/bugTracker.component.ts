@@ -9,6 +9,16 @@ import { Bug } from './models/Bug';
 export class BugTrackerComponent{
 	bugs  : Bug[] = [];
 
+	sortBugBy : string = 'name';
+	sortByDesc : boolean = false;
+
+	constructor(){
+		this.bugs.push({name : 'Server communication failure', isClosed : false});
+		this.bugs.push({name : 'Data integrity checks failed', isClosed : true});
+		this.bugs.push({name : 'User actions not recognised', isClosed : true});
+		this.bugs.push({name : 'Application not responding', isClosed : false});
+	}
+
 	onAddNewClick(bugName : string){
 		let newBug = {
 			name : bugName,
