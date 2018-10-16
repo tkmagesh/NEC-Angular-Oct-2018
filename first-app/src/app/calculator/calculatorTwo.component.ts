@@ -9,22 +9,4 @@ export class CalculatorTwoComponent{
 	
 	model : CalculatorModel = new CalculatorModel();
 
-	selectedOperator : string = '';
-
-	onCalculateClick(){
-		switch (this.selectedOperator) {
-			case "add":
-				this.model.add();
-				break;
-			case "subtract":
-				this.model.subtract();
-				break;
-			case "multiply":
-				this.model.multiply();
-				break;
-			case "divide":
-				this.model.divide();
-				break;
-		}
-	}
 }
