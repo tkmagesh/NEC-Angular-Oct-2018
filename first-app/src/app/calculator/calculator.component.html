@@ -1,9 +1,9 @@
 <h2>Calculator</h2>
  <hr>
- <input type="number"  (change)="n1 = $event.target.valueAsNumber">
- <input type="number"  (change)="n2 = $event.target.valueAsNumber">
- <input type="button" value="Add" (click)="onAddClick()">
- <input type="button" value="Subtract" (click)="onSubtractClick()">
- <input type="button" value="Multiply" (click)="onMultiplyClick()">
- <input type="button" value="Divide" (click)="onDivideClick()">
- <div>{{result}}</div>
+ <input type="number"  (change)="model.n1 = $event.target.valueAsNumber">
+ <input type="number"  (change)="model.n2 = $event.target.valueAsNumber">
+ <input type="button" value="Add" (click)="model.add()">
+ <input type="button" value="Subtract" (click)="model.subtract()">
+ <input type="button" value="Multiply" (click)="model.multiply()">
+ <input type="button" value="Divide" (click)="model.divide()">
+ <div>{{model.result}}</div>
