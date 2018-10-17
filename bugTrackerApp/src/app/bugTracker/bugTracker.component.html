@@ -1,5 +1,5 @@
 <section class="stats">
-	<span class="closed">{{getClosedCount()}}</span>
+	<span class="closed">{{bugs | closedCount}}</span>
 	<span> / </span>
 	<span>{{bugs.length}}</span>
 </section>
@@ -28,7 +28,7 @@
 			>
 				{{bug.name | trimText:40}}
 			</span>
-			<div class="datetime">{{bug.createdAt | date:'dd-MMM-yyyy hh:mm:ss a'}}</div>
+			<div class="datetime">{{bug.createdAt | elapsed}}</div>
 		</li>
 	</ol>
 	<input type="button" value="Remove Closed" (click)="onRemoveClosedClick()">
