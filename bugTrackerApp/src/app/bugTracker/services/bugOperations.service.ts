@@ -19,9 +19,10 @@ export class BugOperationsService{
 		return newBug;
 	}
 
-	toggle(bugToToggle : Bug ) : void {
-		bugToToggle.isClosed = !bugToToggle.isClosed;
-		this.bugStorage.save(bugToToggle);
+	toggle(bugToToggle : Bug ) : Bug {
+		let toggledBug = {...bugToToggle, isClosed : !bugToToggle.isClosed};
+		this.bugStorage.save(toggledBug);
+		return toggledBug;
 	}
 
 	remove(bug : Bug){
