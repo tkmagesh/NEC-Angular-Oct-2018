@@ -30,9 +30,55 @@ var app = (function(){
 		addAsync(x,y, function(result){
 			console.log(`[@Client] result = ${result}`);	
 		});
-		
 	}
 
 	window['addAsyncClient'] = addAsyncClient;
 
+	var addAsyncEvents = (function(){
+		var _callbacks = [];
+		function process(x,y){
+			console.log(`	[@Service] processing ${x} and ${y}`);
+			setTimeout(function(){
+				let result = x + y;
+				console.log(`	[@Service] returning result`);
+				_callbacks.forEach(callback => callback(result));
+			}, 4000);
+		}
+		function subscribe(callback){
+			_callbacks.push(callback);
+		}
+		return {
+			process,
+			subscribe
+		};
+	})();
+
+	window['addAsyncEvents'] = addAsyncEvents;
+
+	function addAsyncPromise(x,y){
+
+		var promise = new Promise(function(resolveFn, rejectFn){
+			console.log(`	[@Service] processing ${x} and ${y}`);
+			setTimeout(function(){
+				let result = x + y;
+				console.log(`	[@Service] returning result`);
+				resolveFn(result);
+			}, 4000);
+		});
+		return promise;
+	}
+
+	window['addAsyncPromise'] = addAsyncPromise;
 })();
+
+/*
+Client
+======
+
+var p = addAsyncPromise(100,200);
+p.then(function(result){
+	console.log(`[@Client] result = ${result}`);
+});
+*/
+
+
