@@ -1,10 +1,18 @@
 {
   "bugs": [
     {
-      "id": 1,
+      "id": 3,
       "name": "Data integrity checks failed",
-      "isClosed": true,
-      "createdAt": "2018-10-18T09:02:17.010Z"
+      "isClosed": false,
+      "createdAt": "2018-10-18T09:38:38.876Z",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur aliquam id pariatur ipsa expedita nesciunt doloribus facilis architecto quisquam totam veniam odio, minima, labore deleniti, neque nam quia amet eveniet."
+    },
+    {
+      "id": 5,
+      "name": "User actions not recognized",
+      "isClosed": false,
+      "createdAt": "2018-10-18T09:41:15.610Z",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur aliquam id pariatur ipsa expedita nesciunt doloribus facilis architecto quisquam totam veniam odio, minima, labore deleniti, neque nam quia amet eveniet."
     }
   ],
   "projects": [
