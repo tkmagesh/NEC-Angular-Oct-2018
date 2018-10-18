@@ -1,30 +1,35 @@
+import { Injectable } from '@angular/core';
 import { Bug } from '../models/Bug';
-import axios from 'axios';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
+@Injectable()
 export class BugStorageService{
 	private storage = window.localStorage;
 	//private currentBugId = 0;
 
 	private serviceUrl = 'http://localhost:3000/bugs';
 
-	async getAll() : Promise<Bug[]>{
-		let response = await axios.get(this.serviceUrl);
-		return response.data;		
+	constructor(private httpClient : HttpClient){
+
 	}
 
-	async save(bugData : Bug) : Promise<Bug> {
+	getAll() : Observable<Bug[]>{
+		return this.httpClient
+			.get<Bug[]>(this.serviceUrl)
+
+	}
+
+	save(bugData : Bug) : Observable<Bug> {
 		if (bugData.id === 0){
-			let response = await axios.post(this.serviceUrl, bugData)
-			return response.data;
+			return this.httpClient.post<Bug>(this.serviceUrl, bugData);
 		} else {
-			 let response = await axios.put(`${this.serviceUrl}/${bugData.id}`, bugData);
-			 return response.data;
+			 return this.httpClient.put<Bug>(`${this.serviceUrl}/${bugData.id}`, bugData);
 		}
 	}
 
-	async remove(bugData : Bug) : Promise<any> {
-		let response = await axios.delete(`${this.serviceUrl}/${bugData.id}`)
-		return response.data;
+	remove(bugData : Bug) : Observable<any> {
+		return this.httpClient.delete<Bug>(`${this.serviceUrl}/${bugData.id}`)
 	}
 
 

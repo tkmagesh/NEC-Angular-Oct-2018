@@ -31,7 +31,7 @@ export class BugEditComponent{
 
 		this.bugOperations
 			.createNew(this.newBugName)
-			.subscribe(newBug => this.newBugCreated.emit(newBug));
+			.then(newBug => this.newBugCreated.emit(newBug));
 		//this.bugs.push(newBug);
 		//this.bugs = [...this.bugs, newBug];
 		
