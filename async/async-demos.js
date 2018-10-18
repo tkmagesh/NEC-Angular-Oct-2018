@@ -68,7 +68,13 @@ var app = (function(){
 		return promise;
 	}
 
-	window['addAsyncPromise'] = addAsyncPromise;
+	async function addAsyncPromiseClient(x,y){
+		console.log(`[@Client] triggering addSync`);
+		let result = await addAsyncPromise(x,y);
+		console.log(`[@Client result = ${result}`)
+	}
+
+	window['addAsyncPromiseClient'] = addAsyncPromiseClient;
 })();
 
 /*

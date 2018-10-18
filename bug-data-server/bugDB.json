@@ -1,13 +1,6 @@
 {
   "bugs": [
     {
-      "id": 1,
-      "name": "User actions not recognized",
-      "isClosed": false,
-      "createdAt": "2018-08-29T09:47:32.505Z",
-      "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur aliquam id pariatur ipsa expedita nesciunt doloribus facilis architecto quisquam totam veniam odio, minima, labore deleniti, neque nam quia amet eveniet."
-    },
-    {
       "id": 3,
       "name": "Socket server is not broadcasting",
       "isClosed": false,
