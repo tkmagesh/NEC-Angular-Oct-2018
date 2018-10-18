@@ -79,6 +79,49 @@ var p = addAsyncPromise(100,200);
 p.then(function(result){
 	console.log(`[@Client] result = ${result}`);
 });
+
+1. If the follow up operation is ASYNC
+var p2 = p.then(function(result){
+	console.log('result = ', result);
+	var p2 = new Promise(function(resolveFn, rejectFn){
+		setTimeout(function(){
+            var doubleResult = result * 2;
+			resolveFn(doubleResult);
+        },4000);
+    });
+	return p2;
+});
+p2.then(function(doubleResult){
+	console.log(`doubleResult = ${doubleResult}`);
+})
+
+2. If the follow up operation is SYNC
+var p2 = p.then(function(result){
+	console.log('result = ', result);
+	var p2 = new Promise(function(resolveFn, rejectFn){
+        var doubleResult = result * 2;
+        resolveFn(doubleResult);
+    });
+	return p2;
+});
+
+OR
+
+var p2 = p.then(function(result){
+	console.log('result = ', result);
+	var doubleResult = result * 2;
+	var p2 = Promise.resolve(doubleResult);
+	return p2;
+});
+
+OR
+
+var p2 = p.then(function(result){
+	console.log('result = ', result);
+	var doubleResult = result * 2;
+	return doubleResult;
+});
+
 */
 
 

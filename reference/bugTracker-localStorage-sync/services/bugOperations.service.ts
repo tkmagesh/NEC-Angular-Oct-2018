@@ -8,26 +8,28 @@ export class BugOperationsService{
 	constructor(private bugStorage : BugStorageService){
 
 	}
-	createNew(bugName : string) : Promise<Bug> {
-		let newBugData : Bug = {
+	createNew(bugName : string) : Bug {
+		let newBug : Bug = {
 			id : 0,
 			name : bugName,
 			isClosed : false,
 			createdAt : new Date()
 		};
-		return this.bugStorage.save(newBugData);
+		this.bugStorage.save(newBug);
+		return newBug;
 	}
 
-	toggle(bugToToggle : Bug ) : Promise<Bug> {
+	toggle(bugToToggle : Bug ) : Bug {
 		let toggledBug = {...bugToToggle, isClosed : !bugToToggle.isClosed};
-		return this.bugStorage.save(toggledBug);
+		this.bugStorage.save(toggledBug);
+		return toggledBug;
 	}
 
-	remove(bug : Bug) : Promise<any>{
-		return this.bugStorage.remove(bug);
+	remove(bug : Bug){
+		this.bugStorage.remove(bug);
 	}
 
-	getAll() : Promise<Bug[]>{
+	getAll(){
 		return this.bugStorage.getAll();
 	}
 }

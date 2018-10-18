@@ -1,31 +1,50 @@
 import { Bug } from '../models/Bug';
+import axios from 'axios';
 
 export class BugStorageService{
 	private storage = window.localStorage;
-	private currentBugId = 0;
+	//private currentBugId = 0;
 
-	getAll() : Bug[]{
-		let result : Bug[] = [];
-		for(let index = 0, count = this.storage.length; index < count; index++){
-			let key = this.storage.key(index),
-				rawData = this.storage.getItem(key),
-				bug = JSON.parse(rawData);
-			this.currentBugId = this.currentBugId > bug.id ? this.currentBugId : bug.id;
-			result.push(bug);
-		}
-		return result;
+	private serviceUrl = 'http://localhost:3000/bugs';
+
+	getAll() : Promise<Bug[]>{
+		/*
+		var p = axios.get('http://localhost:3000/bugs');
+		var p2 = p.then(function(response){
+			return response.data;
+		});
+		return p2;
+		*/
+		return axios
+			.get(this.serviceUrl)
+			.then(function(response){
+				return response.data;
+			});
+		
 	}
 
-	save(bug : Bug) : Bug {
-		if (bug.id === 0){
-			bug.id = ++this.currentBugId;
+	save(bugData : Bug) : Promise<Bug> {
+		if (bugData.id === 0){
+			return axios
+				.post(this.serviceUrl, bugData)
+				.then(function(response){
+					return response.data;
+				});
+		} else {
+			return axios
+				.put(`${this.serviceUrl}/${bugData.id}`, bugData)
+				.then(function(response){
+					return response.data;
+				});
 		}
-		this.storage.setItem(bug.id.toString(), JSON.stringify(bug));
-		return bug;
 	}
 
-	remove(bug : Bug) : void {
-		this.storage.removeItem(bug.id.toString());
+	remove(bugData : Bug) : Promise<any> {
+		return axios
+			.delete(`${this.serviceUrl}/${bugData.id}`)
+			.then(function(response){
+				return response.data;
+			});
 	}
 
 
